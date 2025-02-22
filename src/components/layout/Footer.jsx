@@ -4,18 +4,33 @@ import linkedIn from "../../assets/linkedin.png";
 import twitter from "../../assets/twitter.png";
 import facebook from "../../assets/facebook.png";
 import { MoveUpRight } from "lucide-react";
-
+import { Button } from "../ui/button";
+import { useRef } from "react";
+import Autoplay from "embla-carousel-autoplay";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 const Footer = () => {
+  const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
   return (
     <div className="flex flex-col items-centert mt-6 bg-black text-white font-manrova">
-      <div className="flex justify-center items-center ">
-        {works.map((work, index) => (
-          <div key={index} className="flex items-center m-2">
-            <img src={icon} alt="icon" className="size-10 bg-inherit" />
-            <span className="p-2 uppercase text-sm line-clampl-1">{work}</span>
-          </div>
-        ))}
-      </div>
+      <Carousel
+        plugins={[plugin.current]}
+        className="flex justify-center items-center border-b"
+      >
+        <CarouselContent className="flex gap-2 sm:gap-20 items-center">
+          {works.map((work, index) => (
+            <CarouselItem key={index} className="flex items-center m-2">
+              <img src={icon} alt="icon" className="size-10 bg-inherit" />
+              <span className="p-2 uppercase text-sm line-clampl-1">
+                {work}
+              </span>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
       <div className="flex justify-center items-center mt-4">
         <div className="px-20 py-[100px] flex flex-col items-center gap-[10px]">
           <p className=" text-gray-500 font-semibold text-xl uppercase">
@@ -24,9 +39,9 @@ const Footer = () => {
           <div className="flex items-center gap-2 mt-10">
             <p className="text-white text-[58px] uppercase text-left">Let’s</p>
             <p>
-              <button className="bg-[#4A2CED] rounded-[100px] py-[18px] px-[50px] shadow-lg inset-0">
+              <Button className="bg-[#4A2CED] rounded-[100px] py-[18px] px-[50px] shadow-lg inset-0">
                 <MoveUpRight size={32} />
-              </button>
+              </Button>
             </p>
           </div>
           <p className="uppercase text-[58px] font-semibold">Work Together</p>
